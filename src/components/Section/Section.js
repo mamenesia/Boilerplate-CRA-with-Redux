@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './section.module.css'
+import styles from '../styles.module.css'
 import classNames from 'classnames'
 
 const Section = props => {

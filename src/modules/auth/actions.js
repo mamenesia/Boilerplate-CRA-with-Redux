@@ -22,7 +22,6 @@ export const signIn = credentials => async dispatch => {
     localStorage.setItem('token', res.data.token)
     localStorage.setItem('uid', res.data.uid)
     localStorage.setItem('rid', res.data.rid)
-    localStorage.setItem('pid', res.data.pid)
     dispatch({ type: AUTHENTICATED, isLoading: false })
     window.location.href = '/profile'
   } catch (err) {
@@ -83,7 +82,6 @@ export const signOut = () => dispatch => {
   localStorage.removeItem('token')
   localStorage.removeItem('uid')
   localStorage.removeItem('rid')
-  localStorage.removeItem('pid')
   dispatch({ type: UNAUTHENTICATED })
   window.location.reload()
 }
