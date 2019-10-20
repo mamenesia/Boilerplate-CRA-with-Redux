@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
@@ -6,6 +7,7 @@ import { signIn, signOut } from '../../modules/auth/actions'
 import classNames from 'classnames'
 import * as Yup from 'yup'
 import styles from './layout.module.css'
+import { userData } from '../../helper/Common'
 
 const initialValues = {
   email: '',
@@ -31,10 +33,14 @@ class DefaultHeader extends Component {
     })
   }
 
+  handleLogin = values => {
+    const { signIn } = this.props
+    signIn(values)
+  }
+
   render() {
     const { isModalLogin } = this.state
-    const { auth } = this.props
-    console.log(auth)
+    const { auth, signOut } = this.props
 
     let cssModalLogin = styles.modal
     if (isModalLogin) cssModalLogin += ` ${styles['is-active']}`
@@ -119,30 +125,59 @@ class DefaultHeader extends Component {
               </div>
 
               <div className={classNames(styles['navbar-end'])}>
-                <div className={classNames(styles['navbar-item'])}>
-                  <div className={classNames(styles['buttons'])}>
-                    <a
-                      href="/join/signup"
-                      className={classNames(
-                        styles['button'],
-                        styles['is-info']
-                      )}
-                    >
-                      <strong>Sign up</strong>
-                    </a>
-                    <button
-                      type="button"
-                      className={classNames(
-                        styles.button,
-                        styles['is-info'],
-                        styles['is-outlined']
-                      )}
-                      onClick={this.toggleModalLogin}
-                    >
-                      Masuk
-                    </button>
+                {!auth ? (
+                  <div className={classNames(styles['navbar-item'])}>
+                    <div className={classNames(styles['buttons'])}>
+                      <a
+                        href="/join/signup"
+                        className={classNames(
+                          styles['button'],
+                          styles['is-info']
+                        )}
+                      >
+                        <strong>Sign up</strong>
+                      </a>
+                      <button
+                        type="button"
+                        className={classNames(
+                          styles.button,
+                          styles['is-info'],
+                          styles['is-outlined']
+                        )}
+                        onClick={this.toggleModalLogin}
+                      >
+                        Masuk
+                      </button>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div
+                    className={classNames(
+                      styles['navbar-item'],
+                      styles['has-dropdown'],
+                      styles['is-hoverable']
+                    )}
+                  >
+                    <span className={classNames(styles['navbar-link'])}>
+                      Hai, {userData().fullName}
+                    </span>
+
+                    <div className={classNames(styles['navbar-dropdown'])}>
+                      <a href="/" className={classNames(styles['navbar-item'])}>
+                        Profile
+                      </a>
+                      <hr className={classNames(styles['navbar-divider'])} />
+                      <a
+                        role="button"
+                        onClick={signOut}
+                        onKeyPress={signOut}
+                        className={classNames(styles['navbar-item'])}
+                      >
+                        Keluar
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -233,14 +268,15 @@ class DefaultHeader extends Component {
                   className={classNames(styles.help)}
                   style={{ fontSize: '14px' }}
                 >
-                  <a href="/join/signup">Belum punya akun?</a> atau
-                  <span
+                  <a href="/join/signup">Belum punya akun?</a>
+                  &nbsp; atau &nbsp;
+                  <a
                     role="button"
                     onKeyPress={this.toggleModalForgotPass}
                     onClick={this.showForgotPass}
                   >
                     Lupa Password
-                  </span>
+                  </a>
                 </p>
               </div>
             </div>

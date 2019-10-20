@@ -7,6 +7,10 @@ const Landing = Loadable({
   loader: () => import('./views/pages/Landing'),
   loading: Loading
 })
+const Profile = Loadable({
+  loader: () => import('./views/pages/Profile'),
+  loading: Loading
+})
 
 const routes = [
   {
@@ -14,6 +18,12 @@ const routes = [
     exact: true,
     name: 'Landing',
     component: Landing,
+  },
+  {
+    path: '/profile',
+    exact: true,
+    name: 'Profile',
+    component: Profile,
   },
 ]
 

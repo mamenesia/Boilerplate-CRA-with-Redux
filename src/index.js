@@ -13,7 +13,7 @@ import { AUTHENTICATED, UNAUTHENTICATED } from './modules/auth/types'
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 const store = createStoreWithMiddleware(rootReducer)
 
-const jwtPass = 'uh7kcDlXJEg0iU2F1ZsmhUuMEHG3'
+const jwtPass = 'CGqud32Ab0dQRSfQ2F4qbQyutJr1'
 const token = localStorage.getItem('token')
 
 const invalidValues = [undefined, null, '']
