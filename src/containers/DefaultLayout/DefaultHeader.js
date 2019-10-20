@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import { FormikInput } from '../../helper/Form'
@@ -23,7 +24,14 @@ const loginSchema = Yup.object().shape({
 
 class DefaultHeader extends Component {
   state = {
-    isModalLogin: false
+    isModalLogin: false,
+    isActive: false
+  }
+
+  toggleNav = () => {
+    this.setState(prevState => ({
+      isActive: !prevState.isActive
+    }))
   }
 
   toggleModalLogin = () => {
@@ -39,11 +47,20 @@ class DefaultHeader extends Component {
   }
 
   render() {
-    const { isModalLogin } = this.state
-    const { auth, signOut } = this.props
+    const { isModalLogin, isActive } = this.state
+    const { auth, authError, signOut } = this.props
 
+    // custom modal login
     let cssModalLogin = styles.modal
     if (isModalLogin) cssModalLogin += ` ${styles['is-active']}`
+
+    // custom burger menu
+    let cssBurgerMenu = `${styles['navbar-burger']} ${styles.burger}`
+    if (isActive) cssBurgerMenu += ` ${styles['is-active']}`
+
+    // custom navbar menu
+    let cssNavbarMenu = styles['navbar-menu']
+    if (isActive) cssNavbarMenu += ` ${styles['is-active']}`
 
     return (
       <>
@@ -54,10 +71,7 @@ class DefaultHeader extends Component {
         >
           <div className={classNames(styles['container'])}>
             <div className={classNames(styles['navbar-brand'])}>
-              <a
-                className={classNames(styles['navbar-item'])}
-                href="https://bulma.io"
-              >
+              <a className={classNames(styles['navbar-item'])} href="/">
                 <img
                   src="https://bulma.io/images/bulma-logo.png"
                   width="112"
@@ -68,13 +82,12 @@ class DefaultHeader extends Component {
 
               <span
                 role="button"
-                className={classNames(
-                  styles['navbar-burger'],
-                  styles['burger']
-                )}
+                className={cssBurgerMenu}
+                onClick={this.toggleNav}
+                onKeyPress={this.toggleNav}
                 aria-label="menu"
                 aria-expanded="false"
-                data-target="navbarBasicExample"
+                data-target="navbarToggle"
               >
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -82,19 +95,14 @@ class DefaultHeader extends Component {
               </span>
             </div>
 
-            <div
-              id="navbarBasicExample"
-              className={classNames(styles['navbar-menu'])}
-            >
+            <div id="navbarToggle" className={cssNavbarMenu}>
               <div className={classNames(styles['navbar-start'])}>
                 <a href="/" className={classNames(styles['navbar-item'])}>
                   Home
                 </a>
-
-                <a href="/" className={classNames(styles['navbar-item'])}>
+                <Link to="/" className={classNames(styles['navbar-item'])}>
                   Documentation
-                </a>
-
+                </Link>
                 <div
                   className={classNames(
                     styles['navbar-item'],
@@ -107,19 +115,19 @@ class DefaultHeader extends Component {
                   </span>
 
                   <div className={classNames(styles['navbar-dropdown'])}>
-                    <a href="/" className={classNames(styles['navbar-item'])}>
+                    <Link to="/" className={classNames(styles['navbar-item'])}>
                       About
-                    </a>
-                    <a href="/" className={classNames(styles['navbar-item'])}>
+                    </Link>
+                    <Link to="/" className={classNames(styles['navbar-item'])}>
                       Jobs
-                    </a>
-                    <a href="/" className={classNames(styles['navbar-item'])}>
+                    </Link>
+                    <Link to="/" className={classNames(styles['navbar-item'])}>
                       Contact
-                    </a>
+                    </Link>
                     <hr className={classNames(styles['navbar-divider'])} />
-                    <a href="/" className={classNames(styles['navbar-item'])}>
+                    <Link to="/" className={classNames(styles['navbar-item'])}>
                       Report an issue
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -128,15 +136,15 @@ class DefaultHeader extends Component {
                 {!auth ? (
                   <div className={classNames(styles['navbar-item'])}>
                     <div className={classNames(styles['buttons'])}>
-                      <a
-                        href="/join/signup"
+                      <Link
+                        to="/join/signup"
                         className={classNames(
                           styles['button'],
                           styles['is-info']
                         )}
                       >
                         <strong>Sign up</strong>
-                      </a>
+                      </Link>
                       <button
                         type="button"
                         className={classNames(
@@ -163,9 +171,12 @@ class DefaultHeader extends Component {
                     </span>
 
                     <div className={classNames(styles['navbar-dropdown'])}>
-                      <a href="/" className={classNames(styles['navbar-item'])}>
+                      <Link
+                        to="/profile"
+                        className={classNames(styles['navbar-item'])}
+                      >
                         Profile
-                      </a>
+                      </Link>
                       <hr className={classNames(styles['navbar-divider'])} />
                       <a
                         role="button"
@@ -257,11 +268,17 @@ class DefaultHeader extends Component {
                 )}
               </Formik>
 
-              {/* <div className={styles.field}>
-                <p className={[styles["help-login"], styles["has-text-danger"]].join(" ")}>
+              <br />
+              <div className={classNames(styles.field)}>
+                <p
+                  className={classNames(
+                    styles['help-login'],
+                    styles['has-text-danger']
+                  )}
+                >
                   {authError}
                 </p>
-              </div> */}
+              </div>
 
               <div className={classNames(styles.field)} align="center">
                 <p

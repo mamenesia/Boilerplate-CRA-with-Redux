@@ -11,6 +11,10 @@ const Profile = Loadable({
   loader: () => import('./views/pages/Profile'),
   loading: Loading
 })
+const SignUp = Loadable({
+  loader: () => import('./views/auth/SignUp'),
+  loading: Loading
+})
 
 const routes = [
   {
@@ -24,6 +28,12 @@ const routes = [
     exact: true,
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/join/signup',
+    exact: true,
+    name: 'SignUp',
+    component: SignUp,
   },
 ]
 
