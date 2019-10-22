@@ -40,7 +40,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-production-js": "GENERATE_SOURCEMAP=false REACT_APP_BUILD_ENV=production react-scripts build",
+    "build-staging-js": "GENERATE_SOURCEMAP=false REACT_APP_BUILD_ENV=staging react-scripts build",
+    "build:production": "npm run build-production-js && cp .htaccess build/ && scp -r build/ root@your_ip_ssh:/var/www/your_project/",
+    "build:staging": "npm run build-staging-js && cp .htaccess build/ && scp -r build/ root@your_ip_ssh:/var/www/your_project/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
