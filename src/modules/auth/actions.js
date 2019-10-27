@@ -36,7 +36,6 @@ export const signIn = credentials => async dispatch => {
 
 export const signUp = rowData => async dispatch => {
   let ObjError = ''
-  let pesanError = ''
   const paramsResponse = {}
 
   try {
@@ -50,31 +49,10 @@ export const signUp = rowData => async dispatch => {
     paramsResponse.link = '/email/verify'
     AlertSuccess(paramsResponse)
   } catch (err) {
-    // console.log(err.response.data)
-    if (
-      err.response.data.errors !== undefined &&
-      err.response.data.errors.length > 0
-    ) {
-      ObjError = err.response.data.errors
-
-      if (err.response.data.errors.length === 1) {
-        pesanError = err.response.data.errors[0].message
-      } else {
-        pesanError = 'Masih ada inputan yang belum diisi!'
-      }
-      // console.log(ObjError)
-    } else {
-      ObjError = err.response.data
-      pesanError = err.response.data[0].message
-      // console.log(ObjError)
-    }
-
-    paramsResponse.title = 'Gagal!'
-    paramsResponse.text = pesanError
-    paramsResponse.icon = 'error'
+    ObjError = err.response && err.response.data.message
 
     dispatch({ type: SIGNUP_ERROR, payload: ObjError, isLoading: false })
-    AlertError(paramsResponse)
+    AlertError(err)
   }
 }
 

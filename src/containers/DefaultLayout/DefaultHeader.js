@@ -2,11 +2,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Formik, Form, Field } from 'formik'
-import { FormikInput } from '../../helper/Form'
-import { signIn, signOut } from '../../modules/auth/actions'
 import classNames from 'classnames'
 import * as Yup from 'yup'
+import { FormikInput } from '../../helper/Form'
+import { signIn, signOut } from '../../modules/auth/actions'
 import styles from './layout.module.css'
 import { userData } from '../../helper/Common'
 
@@ -65,11 +66,11 @@ class DefaultHeader extends Component {
     return (
       <>
         <nav
-          className={classNames(styles['navbar'])}
+          className={classNames(styles.navbar)}
           role="navigation"
           aria-label="main navigation"
         >
-          <div className={classNames(styles['container'])}>
+          <div className={classNames(styles.container)}>
             <div className={classNames(styles['navbar-brand'])}>
               <a className={classNames(styles['navbar-item'])} href="/">
                 <img
@@ -89,9 +90,9 @@ class DefaultHeader extends Component {
                 aria-expanded="false"
                 data-target="navbarToggle"
               >
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
               </span>
             </div>
 
@@ -135,13 +136,10 @@ class DefaultHeader extends Component {
               <div className={classNames(styles['navbar-end'])}>
                 {!auth ? (
                   <div className={classNames(styles['navbar-item'])}>
-                    <div className={classNames(styles['buttons'])}>
+                    <div className={classNames(styles.buttons)}>
                       <Link
                         to="/join/signup"
-                        className={classNames(
-                          styles['button'],
-                          styles['is-info']
-                        )}
+                        className={classNames(styles.button, styles['is-info'])}
                       >
                         <strong>Sign up</strong>
                       </Link>
@@ -167,7 +165,8 @@ class DefaultHeader extends Component {
                     )}
                   >
                     <span className={classNames(styles['navbar-link'])}>
-                      Hai, {userData().fullName}
+                      Hai,&nbsp;
+                      {userData().fullName}
                     </span>
 
                     <div className={classNames(styles['navbar-dropdown'])}>
@@ -308,6 +307,17 @@ class DefaultHeader extends Component {
       </>
     )
   }
+}
+
+DefaultHeader.propTypes = {
+  auth: PropTypes.bool,
+  signIn: PropTypes.func,
+  signOut: PropTypes.func,
+  authError: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node
+  ])
 }
 
 const mapStateToProps = state => ({

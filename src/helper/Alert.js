@@ -1,7 +1,7 @@
 import React from 'react'
 import Swal from 'sweetalert2'
-import styles from '../app.module.css'
 import classNames from 'classnames'
+import styles from '../app.module.css'
 import 'sweetalert2/src/sweetalert2.scss'
 
 const invalidValues = [undefined, null, '']
@@ -28,26 +28,33 @@ const AlertSuccess = params => {
     })
 }
 
-const AlertError = params => {
+const AlertError = err => {
+  let pesanError
+  if (err.response) {
+    pesanError = err.response.data.message
+  } else {
+    pesanError = 'Internal server error'
+  }
+
   Swal.fire({
-    title: params.title,
-    text: params.text,
-    type: params.icon,
+    title: 'Oops!',
+    text: pesanError,
+    type: 'error',
     confirmButtonColor: '#20a8d8',
     allowOutsideClick: false,
     allowEscapeKey: false
   })
 }
 
-const ErrorMessage = params => {
-  if (!invalidValues.includes(params)) {
-    return params.map(row => (
-      <div className={classNames(styles.field)} key={`rmesage-${row.message}`}>
+const ErrorMessage = message => {
+  if (!invalidValues.includes(message)) {
+    return (
+      <div className={classNames(styles.field)}>
         <p className={classNames(styles.help, styles['has-text-danger'])}>
-          {row.message}
+          {message}
         </p>
       </div>
-    ))
+    )
   }
 }
 

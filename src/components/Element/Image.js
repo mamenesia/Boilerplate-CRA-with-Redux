@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from '../styles.module.css'
 import classNames from 'classnames'
+import styles from '../styles.module.css'
 
 const Figure = props => {
   const { size, children } = props
@@ -15,9 +15,9 @@ const Figure = props => {
 const Image = props => {
   const { src, width, alt } = props
   return (
-    <React.Fragment>
+    <>
       <img src={src} width={width} alt={alt} />
-    </React.Fragment>
+    </>
   )
 }
 

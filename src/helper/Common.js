@@ -42,7 +42,7 @@ const fileUploadPreview = (filePreviewUrl, fileType, fileSize) => {
     filterFileSize = `${Math.ceil(fileSize / 1024)} Kb`
   }
   return (
-    <React.Fragment>
+    <>
       <button
         type="button"
         disabled
@@ -86,7 +86,7 @@ const fileUploadPreview = (filePreviewUrl, fileType, fileSize) => {
       ) : (
         <span>&nbsp;</span>
       )}
-    </React.Fragment>
+    </>
   )
 }
 

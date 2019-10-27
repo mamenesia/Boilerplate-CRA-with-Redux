@@ -6,7 +6,7 @@ import DefaultHeader from './containers'
 function App() {
   return (
     <Router>
-      <React.Fragment>
+      <>
         <DefaultHeader />
 
         <Switch>
@@ -20,8 +20,7 @@ function App() {
               />
             ))}
         </Switch>
-
-      </React.Fragment>
+      </>
     </Router>
   )
 }
