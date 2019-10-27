@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from '../styles.module.css'
 import classNames from 'classnames'
+import styles from '../styles.module.css'
 
 const Title = props => {
   const { size, color, style, children } = props
   return (
-    <React.Fragment>
+    <>
       <h1
         className={classNames(
           styles.title,
@@ -17,14 +17,14 @@ const Title = props => {
       >
         {children}
       </h1>
-    </React.Fragment>
+    </>
   )
 }
 
 const SubTitle = props => {
   const { size, color, style, children } = props
   return (
-    <React.Fragment>
+    <>
       <h2
         className={classNames(
           styles.subtitle,
@@ -35,7 +35,7 @@ const SubTitle = props => {
       >
         {children}
       </h2>
-    </React.Fragment>
+    </>
   )
 }
 

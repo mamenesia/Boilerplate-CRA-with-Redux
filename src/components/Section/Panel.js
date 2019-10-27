@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from '../styles.module.css'
 import classNames from 'classnames'
+import styles from '../styles.module.css'
 
 const Panel = props => {
   const { title, style, children } = props
   return (
-    <React.Fragment>
+    <>
       <nav
         className={classNames(styles.panel, styles['is-reveal-box'])}
         style={style}
@@ -21,7 +21,7 @@ const Panel = props => {
         </p>
         <div className={classNames(styles['panel-block'])}>{children}</div>
       </nav>
-    </React.Fragment>
+    </>
   )
 }
 

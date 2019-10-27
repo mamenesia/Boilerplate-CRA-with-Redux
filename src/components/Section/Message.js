@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from '../styles.module.css'
 import classNames from 'classnames'
+import styles from '../styles.module.css'
 
 const Message = props => {
   const { color, size, children } = props
@@ -47,6 +47,11 @@ const Help = props => {
 
 Message.propTypes = {
   color: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object
+  ]),
+  size: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
     PropTypes.object

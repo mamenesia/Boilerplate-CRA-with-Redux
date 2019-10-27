@@ -13,7 +13,10 @@ const Profile = props => {
     <Section withPadding>
       <Container>
         <Title>Hallo, Developer React Js</Title>
-        <SubTitle>Profile, {userData().fullName}</SubTitle>
+        <SubTitle>
+          Profile,&nbps;
+          {userData().fullName}
+        </SubTitle>
       </Container>
     </Section>
   )

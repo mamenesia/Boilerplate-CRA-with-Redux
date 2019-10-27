@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from '../styles.module.css'
 import classNames from 'classnames'
+import styles from '../styles.module.css'
 
 const Section = props => {
   const { children, withPadding, background, bgImage, color, style } = props

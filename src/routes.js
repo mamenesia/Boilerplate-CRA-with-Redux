@@ -21,20 +21,20 @@ const routes = [
     path: '/',
     exact: true,
     name: 'Landing',
-    component: Landing,
+    component: Landing
   },
   {
     path: '/profile',
     exact: true,
     name: 'Profile',
-    component: Profile,
+    component: Profile
   },
   {
     path: '/join/signup',
     exact: true,
     name: 'SignUp',
-    component: SignUp,
-  },
+    component: SignUp
+  }
 ]
 
 export default routes
