@@ -4,24 +4,27 @@ import classNames from 'classnames'
 import styles from '../styles.module.css'
 
 const Panel = props => {
-  const { title, style, children } = props
+  const { title, styleHead, styleBody, withBorder, children } = props
+  const isPanelWithBorder = withBorder
+    ? 'panel-heading-with-border'
+    : 'panel-heading'
+  const isPanelBlock = withBorder ? 'panel-block-with-border' : 'panel-block'
+
   return (
-    <>
-      <nav
-        className={classNames(styles.panel, styles['is-reveal-box'])}
-        style={style}
+    <nav className={classNames(styles.panel, styles['is-reveal-box'])}>
+      <p
+        className={classNames(
+          styles[isPanelWithBorder],
+          styles['has-text-centered']
+        )}
+        style={styleHead}
       >
-        <p
-          className={classNames(
-            styles['panel-heading'],
-            styles['has-text-centered']
-          )}
-        >
-          {title}
-        </p>
-        <div className={classNames(styles['panel-block'])}>{children}</div>
-      </nav>
-    </>
+        {title}
+      </p>
+      <div className={classNames(styles[isPanelBlock])} style={styleBody}>
+        {children}
+      </div>
+    </nav>
   )
 }
 
@@ -31,11 +34,17 @@ Panel.propTypes = {
     PropTypes.array,
     PropTypes.object
   ]),
-  style: PropTypes.oneOfType([
+  styleHead: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
     PropTypes.object
   ]),
+  styleBody: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object
+  ]),
+  withBorder: PropTypes.bool,
   children: PropTypes.node
 }
 

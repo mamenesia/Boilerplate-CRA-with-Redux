@@ -5,7 +5,7 @@ import styles from '../styles.module.css'
 
 const Section = props => {
   const { children, withPadding, background, bgImage, color, style } = props
-  const isSection = withPadding ? 'section' : ''
+  const isSection = withPadding && 'section'
   return (
     <section
       className={classNames(
@@ -27,11 +27,24 @@ const Container = props => {
 }
 
 const Columns = props => {
-  const { children, multiline, vCentered, desktop, mobile, style } = props
-  const isMultiLine = multiline ? 'is-multiline' : ''
-  const isDesktop = desktop ? 'is-desktop' : ''
-  const isMobile = mobile ? 'is-mobile' : ''
-  const isCentered = vCentered ? 'is-vcentered' : ''
+  const {
+    children,
+    multiline,
+    vCentered,
+    desktop,
+    mobile,
+    gapless,
+    variable,
+    sizeVariable,
+    style
+  } = props
+  const isMultiLine = multiline && 'is-multiline'
+  const isDesktop = desktop && 'is-desktop'
+  const isMobile = mobile && 'is-mobile'
+  const isCentered = vCentered && 'is-vcentered'
+  const isGapless = gapless && 'is-gapless'
+  const isVariable = variable && 'is-variable'
+  const sizeVar = variable && sizeVariable ? sizeVariable : 'is-3'
   return (
     <div
       className={classNames(
@@ -39,7 +52,10 @@ const Columns = props => {
         styles[isMultiLine],
         styles[isDesktop],
         styles[isMobile],
-        styles[isCentered]
+        styles[isCentered],
+        styles[isGapless],
+        styles[isVariable],
+        styles[sizeVar]
       )}
       style={style}
     >
@@ -49,9 +65,18 @@ const Columns = props => {
 }
 
 const Column = props => {
-  const { children, size, style } = props
+  const { children, size, offset, narrow, style } = props
+  const isNarrow = narrow && narrow
   return (
-    <div className={classNames(styles.column, styles[`${size}`])} style={style}>
+    <div
+      className={classNames(
+        styles.column,
+        styles[`is-${size}`],
+        styles[`is-offset-${offset}`],
+        styles[isNarrow]
+      )}
+      style={style}
+    >
       {children}
     </div>
   )
@@ -66,7 +91,11 @@ Section.propTypes = {
     PropTypes.node
   ]),
   color: PropTypes.string,
-  withPadding: PropTypes.bool,
+  withPadding: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ]),
   children: PropTypes.node
 }
 
@@ -75,10 +104,37 @@ Container.propTypes = {
 }
 
 Columns.propTypes = {
-  multiline: PropTypes.bool,
-  desktop: PropTypes.bool,
-  mobile: PropTypes.bool,
-  vCentered: PropTypes.bool,
+  multiline: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ]),
+  desktop: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ]),
+  mobile: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ]),
+  vCentered: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ]),
+  gapless: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ]),
+  variable: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ]),
+  sizeVariable: PropTypes.string,
   children: PropTypes.node,
   style: PropTypes.oneOfType([
     PropTypes.string,
@@ -89,6 +145,12 @@ Columns.propTypes = {
 
 Column.propTypes = {
   size: PropTypes.string,
+  offset: PropTypes.string,
+  narrow: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ]),
   style: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,

@@ -6,36 +6,32 @@ import styles from '../styles.module.css'
 const Title = props => {
   const { size, color, style, children } = props
   return (
-    <>
-      <h1
-        className={classNames(
-          styles.title,
-          styles[`is-size-${size}`],
-          styles[`has-text-${color}`]
-        )}
-        style={style}
-      >
-        {children}
-      </h1>
-    </>
+    <h1
+      className={classNames(
+        styles.title,
+        styles[`is-${size}`],
+        styles[`has-text-${color}`]
+      )}
+      style={style}
+    >
+      {children}
+    </h1>
   )
 }
 
 const SubTitle = props => {
   const { size, color, style, children } = props
   return (
-    <>
-      <h2
-        className={classNames(
-          styles.subtitle,
-          styles[`is-size-${size}`],
-          styles[`has-text-${color}`]
-        )}
-        style={style}
-      >
-        {children}
-      </h2>
-    </>
+    <h2
+      className={classNames(
+        styles.subtitle,
+        styles[`is-${size}`],
+        styles[`has-text-${color}`]
+      )}
+      style={style}
+    >
+      {children}
+    </h2>
   )
 }
 

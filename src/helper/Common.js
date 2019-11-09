@@ -1,7 +1,7 @@
 import React from 'react'
 import jwt from 'jsonwebtoken'
 import classNames from 'classnames'
-import styles from './form.module.css'
+import styles from '../app.module.css'
 
 const invalidValues = [undefined, null, '']
 

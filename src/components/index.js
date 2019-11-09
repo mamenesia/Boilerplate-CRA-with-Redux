@@ -9,7 +9,7 @@ import {
   Help,
   Panel
 } from './Section'
-import { Figure, Image, Title, SubTitle } from './Element'
+import { Figure, Image, IFrame, Title, SubTitle } from './Element'
 
 export {
   Section,
@@ -23,6 +23,7 @@ export {
   Panel,
   Figure,
   Image,
+  IFrame,
   Title,
   SubTitle
 }

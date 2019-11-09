@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import PropTypes from 'prop-types'
-import styles from './form.module.css'
+import styles from '../app.module.css'
 
 const FormikInput = ({ field, form: { touched, errors }, ...props }) => (
   <div className={styles.field}>
