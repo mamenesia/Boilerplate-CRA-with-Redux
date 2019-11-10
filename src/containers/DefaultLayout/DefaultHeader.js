@@ -11,11 +11,6 @@ import { signIn, signOut } from '../../modules/auth/actions'
 import styles from './layout.module.css'
 import { userData } from '../../helper/Common'
 
-const initialValues = {
-  email: '',
-  password: ''
-}
-
 const loginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Email tidak valid')
@@ -27,6 +22,11 @@ class DefaultHeader extends Component {
   state = {
     isModalLogin: false,
     isActive: false
+  }
+
+  initialValues = {
+    email: '',
+    password: ''
   }
 
   toggleNav = () => {
@@ -203,7 +203,7 @@ class DefaultHeader extends Component {
               <div className={classNames(styles['title-login'])} />
 
               <Formik
-                initialValues={initialValues}
+                initialValues={this.initialValues}
                 validationSchema={loginSchema}
                 onSubmit={(values, actions) => {
                   setTimeout(() => {

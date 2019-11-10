@@ -28,6 +28,18 @@ const Panel = props => {
   )
 }
 
+const Footer = props => {
+  const { children, centered } = props
+  const isCentered = centered && 'has-text-centered'
+  return (
+    <footer className={classNames(styles.footer)}>
+      <div className={classNames(styles.content, styles[isCentered])}>
+        {children}
+      </div>
+    </footer>
+  )
+}
+
 Panel.propTypes = {
   title: PropTypes.oneOfType([
     PropTypes.string,
@@ -48,4 +60,13 @@ Panel.propTypes = {
   children: PropTypes.node
 }
 
-export default Panel
+Footer.propTypes = {
+  children: PropTypes.node,
+  centered: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node
+  ])
+}
+
+export { Panel, Footer }
