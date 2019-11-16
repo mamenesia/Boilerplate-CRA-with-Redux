@@ -5,15 +5,15 @@ const Loading = () => <div>Loading...</div>
 
 const Landing = Loadable({
   loader: () => import('./views/pages/Landing'),
-  loading: Loading
+  loading: Loading,
 })
 const Profile = Loadable({
   loader: () => import('./views/pages/Profile'),
-  loading: Loading
+  loading: Loading,
 })
 const SignUp = Loadable({
   loader: () => import('./views/auth/SignUp'),
-  loading: Loading
+  loading: Loading,
 })
 
 const routes = [
@@ -21,20 +21,20 @@ const routes = [
     path: '/',
     exact: true,
     name: 'Landing',
-    component: Landing
+    component: Landing,
   },
   {
     path: '/profile',
     exact: true,
     name: 'Profile',
-    component: Profile
+    component: Profile,
   },
   {
     path: '/join/signup',
     exact: true,
     name: 'SignUp',
-    component: SignUp
-  }
+    component: SignUp,
+  },
 ]
 
 export default routes

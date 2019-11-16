@@ -3,14 +3,14 @@ import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Section, Container, Title, SubTitle } from '../../../components'
-import { userData } from '../../../helper/Common'
+import { userData } from '../../../helper'
 
 const Profile = props => {
   const { auth } = props
   if (!auth) return <Redirect to="/" />
 
   return (
-    <Section withPadding>
+    <Section>
       <Container>
         <Title>Hallo, Developer React Js</Title>
         <SubTitle>
@@ -23,11 +23,11 @@ const Profile = props => {
 }
 
 Profile.propTypes = {
-  auth: PropTypes.bool.isRequired
+  auth: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth.authenticated
+  auth: state.auth.authenticated,
 })
 
 export default connect(mapStateToProps)(Profile)
