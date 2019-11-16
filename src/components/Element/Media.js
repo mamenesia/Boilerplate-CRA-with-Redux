@@ -3,44 +3,42 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from '../styles.module.css'
 
-const Media = props => {
-  const { children } = props
-  return <article className={classNames(styles.media)}>{children}</article>
-}
+const Media = ({ children }) => (
+  <article className={classNames(styles.media)}>{children}</article>
+)
 
-const MediaLeft = props => {
-  const { children } = props
-  return <div className={classNames(styles['media-left'])}>{children}</div>
-}
+const MediaSide = ({ children, align }) => (
+  <div className={classNames({ [styles[`media-${align}`]]: align })}>
+    {children}
+  </div>
+)
 
-const MediaRight = props => {
-  const { children } = props
-  return <div className={classNames(styles['media-right'])}>{children}</div>
-}
-
-const MediaContent = props => {
-  const { children } = props
-  return (
-    <div className={classNames(styles['media-content'])}>
-      <div className={classNames(styles.content)}>{children}</div>
-    </div>
-  )
-}
+const MediaContent = ({ children, style }) => (
+  <div className={classNames(styles['media-content'])} style={style}>
+    <div className={classNames(styles.content)}>{children}</div>
+  </div>
+)
 
 Media.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
-MediaLeft.propTypes = {
-  children: PropTypes.node
-}
-
-MediaRight.propTypes = {
-  children: PropTypes.node
+MediaSide.propTypes = {
+  children: PropTypes.node,
+  align: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.node,
+  ]),
 }
 
 MediaContent.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  style: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.node,
+  ]),
 }
 
-export { Media, MediaLeft, MediaRight, MediaContent }
+export { Media, MediaSide, MediaContent }

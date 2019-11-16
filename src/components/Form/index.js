@@ -1,3 +1,3 @@
-import { FieldInput, Label, Input } from './Form'
+import { FieldInput, FieldControl, FieldLabel, Input } from './Form'
 
-export { FieldInput, Label, Input }
+export { FieldInput, FieldControl, FieldLabel, Input }

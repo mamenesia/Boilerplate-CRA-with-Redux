@@ -1,22 +1,21 @@
 import React from 'react'
 import Select from 'react-select'
 import PropTypes from 'prop-types'
-import styles from '../app.module.css'
+import styles from '../components/styles.module.css'
+import { FieldInput, FieldControl, Help } from '../components'
 
-const FormikInput = ({ field, form: { touched, errors }, ...props }) => (
-  <div className={styles.field}>
-    <div className={styles.control}>
+const CfInput = ({ field, form: { touched, errors }, ...props }) => (
+  <FieldInput>
+    <FieldControl>
       <input {...field} {...props} className={styles.input} />
-    </div>
+    </FieldControl>
     {touched[field.name] && errors[field.name] && (
-      <p className={[styles.help, styles['is-danger']].join(' ')}>
-        {errors[field.name]}
-      </p>
+      <Help color="danger">{errors[field.name]}</Help>
     )}
-  </div>
+  </FieldInput>
 )
 
-const FormikTextarea = ({ field, form: { touched, errors }, ...props }) => (
+const CfTextArea = ({ field, form: { touched, errors }, ...props }) => (
   <div className={styles.field}>
     <div className={styles.control}>
       <textarea {...field} {...props} className={styles.textarea} />
@@ -29,7 +28,7 @@ const FormikTextarea = ({ field, form: { touched, errors }, ...props }) => (
   </div>
 )
 
-const FormikSelect = ({
+const CfSelect = ({
   options,
   field,
   form: { touched, errors, setFieldValue },
@@ -64,69 +63,69 @@ const FormikSelect = ({
   </div>
 )
 
-FormikInput.propTypes = {
+CfInput.propTypes = {
   field: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.array,
     PropTypes.object,
-    PropTypes.func
+    PropTypes.func,
   ]),
   form: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.array,
     PropTypes.object,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 }
 
-FormikTextarea.propTypes = {
+CfTextArea.propTypes = {
   field: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.array,
     PropTypes.object,
-    PropTypes.func
+    PropTypes.func,
   ]),
   form: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.array,
     PropTypes.object,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 }
 
-FormikSelect.propTypes = {
+CfSelect.propTypes = {
   options: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.array,
     PropTypes.object,
-    PropTypes.func
+    PropTypes.func,
   ]),
   field: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.array,
     PropTypes.object,
-    PropTypes.func
+    PropTypes.func,
   ]),
   form: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.array,
     PropTypes.object,
-    PropTypes.func
+    PropTypes.func,
   ]),
   onSelectChange: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.array,
     PropTypes.object,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 }
 
-export { FormikInput, FormikTextarea, FormikSelect }
+export { CfInput, CfTextArea, CfSelect }

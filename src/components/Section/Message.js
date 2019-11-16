@@ -3,81 +3,95 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from '../styles.module.css'
 
-const Message = props => {
-  const { color, size, children } = props
-  return (
-    <article
-      className={classNames(
-        styles.message,
-        styles[`is-${size}`],
-        styles[`is-${color}`]
-      )}
-    >
-      {children}
-    </article>
-  )
-}
+const Message = ({ children, size, color, style }) => (
+  <article
+    className={classNames(styles.message, {
+      [styles[`is-${size}`]]: size,
+      [styles[`is-${color}`]]: color,
+    })}
+    style={style}
+  >
+    {children}
+  </article>
+)
 
-const MessageHeader = props => {
-  const { title } = props
-  return (
-    <div className={classNames(styles['message-header'])}>
-      <p>{title}</p>
-    </div>
-  )
-}
+const MessageHeader = ({ title, style }) => (
+  <div className={classNames(styles['message-header'])} style={style}>
+    <p>{title}</p>
+  </div>
+)
 
-const MessageBody = props => {
-  const { children } = props
-  return (
-    <div
-      className={classNames(styles['message-body'], styles['is-list-message'])}
-    >
-      {children}
-    </div>
-  )
-}
+const MessageBody = ({ children, style }) => (
+  <div
+    className={classNames(styles['message-body'], styles['is-list-message'])}
+    style={style}
+  >
+    {children}
+  </div>
+)
 
-const Help = props => {
-  const { color, children } = props
-  return (
-    <p className={classNames(styles.help, styles[`is-${color}`])}>{children}</p>
-  )
-}
+const Help = ({ children, color, style }) => (
+  <p
+    className={classNames(styles.help, { [styles[`is-${color}`]]: color })}
+    style={style}
+  >
+    {children}
+  </p>
+)
 
 Message.propTypes = {
   color: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
-    PropTypes.object
+    PropTypes.object,
   ]),
   size: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
-    PropTypes.object
+    PropTypes.object,
   ]),
-  children: PropTypes.node
+  style: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
+  children: PropTypes.node,
 }
 
 MessageHeader.propTypes = {
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
-    PropTypes.object
-  ])
+    PropTypes.object,
+  ]),
+  style: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 }
 
 MessageBody.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  style: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 }
 
 Help.propTypes = {
   color: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
-    PropTypes.object
+    PropTypes.object,
   ]),
-  children: PropTypes.node
+  style: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
+  children: PropTypes.node,
 }
 
 export { Message, MessageHeader, MessageBody, Help }

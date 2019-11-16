@@ -8,32 +8,25 @@ import {
   Image,
   Panel,
   Figure,
-  Level,
+  Levels,
   LevelItem,
   LevelHeading,
   LevelTitle,
-  FieldInput,
-  Label,
-  Input
 } from '../../../components'
 
 const Landing = () => {
   return (
-    <Section withPadding>
+    <Section>
       <Container>
         <Panel withBorder title="Hello World">
           <Title color="primary">Hallo, Developer React Js</Title>
           <SubTitle>Landing Page</SubTitle>
           <Figure size="128x128">
-            <Image isRounded src={logo} alt="logo react" />
+            <Image rounded src={logo} alt="logo react" />
           </Figure>
-          <br />
-          <FieldInput>
-            <Label>Username</Label>
-            <Input iconLeft="fas fa-user" iconRight="fas fa-check" />
-          </FieldInput>
         </Panel>
-        <Level>
+
+        <Levels>
           <LevelItem tag="p">
             <div>
               <LevelHeading>Team</LevelHeading>
@@ -52,7 +45,7 @@ const Landing = () => {
               <LevelTitle>4</LevelTitle>
             </div>
           </LevelItem>
-        </Level>
+        </Levels>
       </Container>
     </Section>
   )

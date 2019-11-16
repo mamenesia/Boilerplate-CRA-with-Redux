@@ -3,7 +3,7 @@ import { Section, Container, Title, SubTitle } from '../../../components'
 
 const SignUp = () => {
   return (
-    <Section withPadding>
+    <Section>
       <Container>
         <Title>Register</Title>
         <SubTitle>Under Constructor</SubTitle>

@@ -10,7 +10,11 @@ const FieldInput = ({ children }) => {
   return <div className={classNames(styles.field)}>{children}</div>
 }
 
-const Label = ({ children }) => {
+const FieldControl = ({ children }) => {
+  return <div className={classNames(styles.control)}>{children}</div>
+}
+
+const FieldLabel = ({ children }) => {
   return <label className={classNames(styles.label)}>{children}</label>
 }
 
@@ -63,24 +67,28 @@ const Input = props => {
 }
 
 FieldInput.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
-Label.propTypes = {
-  children: PropTypes.node
+FieldControl.propTypes = {
+  children: PropTypes.node,
+}
+
+FieldLabel.propTypes = {
+  children: PropTypes.node,
 }
 
 Input.propTypes = {
   iconLeft: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
-    PropTypes.node
+    PropTypes.node,
   ]),
   iconRight: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
 }
 
-export { FieldInput, Label, Input }
+export { FieldInput, FieldControl, FieldLabel, Input }

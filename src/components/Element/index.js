@@ -1,6 +1,6 @@
 import { Figure, Image, IFrame } from './Image'
 import { Title, SubTitle } from './Typography'
-import { Media, MediaLeft, MediaRight, MediaContent } from './Media'
+import { Media, MediaSide, MediaContent } from './Media'
 
 export {
   Figure,
@@ -9,7 +9,6 @@ export {
   Title,
   SubTitle,
   Media,
-  MediaLeft,
-  MediaRight,
-  MediaContent
+  MediaSide,
+  MediaContent,
 }

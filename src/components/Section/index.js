@@ -6,18 +6,11 @@ import {
   HeroFoot,
   Columns,
   Column,
-  Container
+  Container,
 } from './Section'
 import { Message, MessageHeader, MessageBody, Help } from './Message'
 import { Panel, Footer } from './Panel'
-import {
-  Level,
-  LevelLeft,
-  LevelRight,
-  LevelItem,
-  LevelHeading,
-  LevelTitle
-} from './Level'
+import { Levels, LevelSide, LevelItem, LevelHeading, LevelTitle } from './Level'
 
 export {
   Section,
@@ -34,10 +27,9 @@ export {
   Help,
   Panel,
   Footer,
-  Level,
-  LevelLeft,
-  LevelRight,
+  Levels,
+  LevelSide,
   LevelItem,
   LevelHeading,
-  LevelTitle
+  LevelTitle,
 }

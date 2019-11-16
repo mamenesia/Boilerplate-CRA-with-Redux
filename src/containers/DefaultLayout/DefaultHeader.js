@@ -6,39 +6,39 @@ import PropTypes from 'prop-types'
 import { Formik, Form, Field } from 'formik'
 import classNames from 'classnames'
 import * as Yup from 'yup'
-import { FormikInput } from '../../helper/Form'
+import { CfInput, userData } from '../../helper'
 import { signIn, signOut } from '../../modules/auth/actions'
 import styles from './layout.module.css'
-import { userData } from '../../helper/Common'
+import { SubTitle, FieldInput, FieldLabel } from '../../components'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Email tidak valid')
     .required('email belum diisi'),
-  password: Yup.string().required('password belum diisi')
+  password: Yup.string().required('password belum diisi'),
 })
 
 class DefaultHeader extends Component {
   state = {
     isModalLogin: false,
-    isActive: false
+    isActive: false,
   }
 
   initialValues = {
     email: '',
-    password: ''
+    password: '',
   }
 
   toggleNav = () => {
     this.setState(prevState => ({
-      isActive: !prevState.isActive
+      isActive: !prevState.isActive,
     }))
   }
 
   toggleModalLogin = () => {
     const { isModalLogin } = this.state
     this.setState({
-      isModalLogin: !isModalLogin
+      isModalLogin: !isModalLogin,
     })
   }
 
@@ -197,9 +197,7 @@ class DefaultHeader extends Component {
           <div className={classNames(styles['modal-background'])} />
           <div className={classNames(styles['modal-content'])}>
             <div className={classNames(styles['box-login'])}>
-              <div className={classNames(styles.subtitle)}>
-                Login to Your Account.
-              </div>
+              <SubTitle>Login to Your Account.</SubTitle>
               <div className={classNames(styles['title-login'])} />
 
               <Formik
@@ -214,26 +212,24 @@ class DefaultHeader extends Component {
               >
                 {({ isSubmitting }) => (
                   <Form>
-                    <div className={classNames(styles.field)}>
-                      <label className={classNames(styles.label)}>Email</label>
-                    </div>
+                    <FieldInput>
+                      <FieldLabel>Email</FieldLabel>
+                    </FieldInput>
                     <Field
                       name="email"
                       type="email"
                       placeholder="example@mail.com"
-                      component={FormikInput}
+                      component={CfInput}
                     />
 
-                    <div className={classNames(styles.field)}>
-                      <label className={classNames(styles.label)}>
-                        Password
-                      </label>
-                    </div>
+                    <FieldInput>
+                      <FieldLabel>Password</FieldLabel>
+                    </FieldInput>
                     <Field
                       name="password"
                       type="password"
                       placeholder="*****"
-                      component={FormikInput}
+                      component={CfInput}
                     />
 
                     <div
@@ -316,18 +312,18 @@ DefaultHeader.propTypes = {
   authError: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
 }
 
 const mapStateToProps = state => ({
   authError: state.auth.error,
-  auth: state.auth.authenticated
+  auth: state.auth.authenticated,
 })
 
 const mapDispatchToProps = dispatch => ({
   signIn: credentials => dispatch(signIn(credentials)),
-  signOut: () => dispatch(signOut())
+  signOut: () => dispatch(signOut()),
 })
 
 export default connect(

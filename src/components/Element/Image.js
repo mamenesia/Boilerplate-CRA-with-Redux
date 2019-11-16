@@ -5,30 +5,33 @@ import styles from '../styles.module.css'
 
 const invalidValues = [undefined, null, '']
 
-const Figure = props => {
-  const { size, children } = props
-  return (
-    <figure className={classNames(styles.image, styles[`is-${size}`])}>
-      {children}
-    </figure>
-  )
-}
+const Figure = ({ children, size, style }) => (
+  <figure
+    className={classNames(styles.image, { [styles[`is-${size}`]]: size })}
+    style={style}
+  >
+    {children}
+  </figure>
+)
 
-const Image = props => {
-  const { src, width, alt, isRounded } = props
-  const isRound = isRounded && 'is-rounded'
-  return (
-    <img
-      className={classNames(styles[isRound])}
-      src={src}
-      width={width}
-      alt={alt}
-    />
-  )
-}
+const Image = ({ src, alt, width, rounded, style }) => (
+  <img
+    className={classNames({ [styles['is-rounded']]: rounded })}
+    src={src}
+    width={width}
+    alt={alt}
+    style={style}
+  />
+)
 
-const IFrame = props => {
-  const { src, width, height, frameBorder, allowFullScreen, title } = props
+const IFrame = ({
+  src,
+  width,
+  height,
+  frameBorder,
+  allowFullScreen,
+  title,
+}) => {
   const isAllowFullScreen = !!allowFullScreen
   const isFrameBorder = !invalidValues.includes(frameBorder) ? frameBorder : '0'
   return (
@@ -46,18 +49,28 @@ const IFrame = props => {
 
 Figure.propTypes = {
   size: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
+  style: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node,
+  ]),
 }
 
 Image.propTypes = {
   src: PropTypes.string,
   width: PropTypes.string,
   alt: PropTypes.string,
-  isRounded: PropTypes.oneOfType([
+  rounded: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
+  style: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.node,
+  ]),
 }
 
 IFrame.propTypes = {
@@ -66,7 +79,7 @@ IFrame.propTypes = {
   height: PropTypes.string,
   title: PropTypes.string,
   allowFullScreen: PropTypes.bool,
-  frameBorder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
+  frameBorder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 }
 
 export { Figure, Image, IFrame }

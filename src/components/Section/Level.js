@@ -3,37 +3,40 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from '../styles.module.css'
 
-const Level = props => {
-  const { children, mobile } = props
-  const isMobile = mobile && 'is-mobile'
-  return (
-    <nav className={classNames(styles.level, styles[isMobile])}>{children}</nav>
-  )
-}
+const Levels = ({ children, mobile, style }) => (
+  <nav
+    className={classNames(styles.level, { [styles['is-mobile']]: mobile })}
+    style={style}
+  >
+    {children}
+  </nav>
+)
 
-const LevelLeft = props => {
-  const { children } = props
-  return <div className={classNames(styles['level-left'])}>{children}</div>
-}
+const LevelSide = ({ children, align }) => (
+  <div className={classNames(styles[`level-${align}`])}>{children}</div>
+)
 
-const LevelRight = props => {
-  const { children } = props
-  return <div className={classNames(styles['level-right'])}>{children}</div>
-}
-
-const LevelItem = props => {
-  const { children, tag, centered } = props
-  const isCenter = centered && 'has-text-centered'
+const LevelItem = ({ children, align, tag, style }) => {
   if (tag === 'p') {
     return (
-      <p className={classNames(styles['level-item'], styles[isCenter])}>
+      <p
+        className={classNames(styles['level-item'], {
+          [styles[`has-text-${align}`]]: align,
+        })}
+        style={style}
+      >
         {children}
       </p>
     )
   }
 
   return (
-    <div className={classNames(styles['level-item'], styles[isCenter])}>
+    <div
+      className={classNames(styles['level-item'], {
+        [styles[`has-text-${align}`]]: align,
+      })}
+      style={style}
+    >
       {children}
     </div>
   )
@@ -47,39 +50,50 @@ const LevelTitle = ({ children }) => {
   return <p className={classNames(styles.title)}>{children}</p>
 }
 
-Level.propTypes = {
+Levels.propTypes = {
   children: PropTypes.node,
   mobile: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
+  style: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.node,
+  ]),
 }
 
-LevelLeft.propTypes = {
-  children: PropTypes.node
-}
-
-LevelRight.propTypes = {
-  children: PropTypes.node
+LevelSide.propTypes = {
+  children: PropTypes.node,
+  align: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.node,
+  ]),
 }
 
 LevelItem.propTypes = {
   children: PropTypes.node,
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.node]),
-  centered: PropTypes.oneOfType([
+  align: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
+  style: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.node,
+  ]),
 }
 
 LevelHeading.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
 LevelTitle.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
-export { Level, LevelLeft, LevelRight, LevelItem, LevelHeading, LevelTitle }
+export { Levels, LevelSide, LevelItem, LevelHeading, LevelTitle }

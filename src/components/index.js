@@ -13,12 +13,11 @@ import {
   Help,
   Panel,
   Footer,
-  Level,
-  LevelLeft,
-  LevelRight,
+  Levels,
+  LevelSide,
   LevelItem,
   LevelHeading,
-  LevelTitle
+  LevelTitle,
 } from './Section'
 import {
   Figure,
@@ -27,11 +26,10 @@ import {
   Title,
   SubTitle,
   Media,
-  MediaLeft,
-  MediaRight,
-  MediaContent
+  MediaSide,
+  MediaContent,
 } from './Element'
-import { FieldInput, Label, Input } from './Form'
+import { FieldInput, FieldControl, FieldLabel, Input } from './Form'
 
 export {
   Section,
@@ -48,9 +46,8 @@ export {
   Help,
   Panel,
   Footer,
-  Level,
-  LevelLeft,
-  LevelRight,
+  Levels,
+  LevelSide,
   LevelItem,
   LevelHeading,
   LevelTitle,
@@ -60,10 +57,10 @@ export {
   Title,
   SubTitle,
   Media,
-  MediaLeft,
-  MediaRight,
+  MediaSide,
   MediaContent,
   FieldInput,
-  Label,
-  Input
+  FieldControl,
+  FieldLabel,
+  Input,
 }

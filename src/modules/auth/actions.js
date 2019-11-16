@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { API_URL } from '../../config/apiConfig'
-import { AlertSuccess, AlertError } from '../../helper/Alert'
+import { AlertSuccess, AlertError } from '../../helper'
 
 import {
   SIGNIN_LOADING,
@@ -9,7 +9,7 @@ import {
   AUTHENTICATION_ERROR,
   SIGNUP_LOADING,
   SIGNUP_SUCCESS,
-  SIGNUP_ERROR
+  SIGNUP_ERROR,
 } from './types'
 
 axios.defaults.baseURL = `${API_URL}`
@@ -29,7 +29,7 @@ export const signIn = credentials => async dispatch => {
     dispatch({
       type: AUTHENTICATION_ERROR,
       payload: err.response.data.message,
-      isLoading: false
+      isLoading: false,
     })
   }
 }
